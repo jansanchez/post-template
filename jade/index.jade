@@ -1,42 +1,47 @@
 extends ./jade/_layout.jade
 block post
 	//- aquí empieza el contenido del post
-	h2 ¿Qué es Yarn de Facebook y Cómo usarlo? 
+	h2 ¿Qué es Yarn? y ¿Cómo usarlo? 
 	p.pre-irrelevant
-		|Yarn es un administrador de dependencias relativamente nuevo, su principal característica es la rápidez.
+		|Yarn es un administrador de dependencias relativamente nuevo, es open source y fue creado por miembros de Facebook y Google, su principal característica es la rápidez.
 		
-	h2 ¿Cómo trabaja Yarn? ¿Qué lo hace tan interesante?
+	h2 ¿Cómo trabaja Yarn?, ¿Qué lo hace tan interesante?
 	p.pre-irrelevant
-		|Es muy difícil no comparar a Yarn con el cliente de npm, así que veamos algunas aspectos de cómo trabaja Yarn:
+		|Es muy difícil no comparar a 
+		b Yarn 
+		| con el 
+		b cli de npm 
+		|, así que veamos algunas características de Yarn:
 	p
-		|Yarn 
-		b almacena en caché todos los paquetes que descarga 
-		| para que nunca vuelva a necesitarlos. Para esto Yarn crea una carpeta global donde administra los paquetes que nosotros instalamos en nuestros proyectos.
+		span.capitalize.yarn 1.
+		|  Yarn 
+		b almacena en caché local todos los paquetes que descarga por primera vez 
+		|, para evitar descargarlos más de 1 vez.  
+		|Esto hace que puedas realizar instalaciones aunque no cuentes con conexión a Internet.
+		|Para esto Yarn crea una carpeta local donde administra los paquetes que nosotros instalamos.
 		
 	p
-		|Yarn 
+		span.capitalize.yarn 2.
+		|  Yarn 
 		b paraleliza las operaciones de descarga de paquetes 
 		| para maximizar la utilización de los recursos, por lo que los tiempos de instalación son mucho más rápidos que los de otros administradores de dependencias. Yarn va descargando dependencias en forma paralela, sin necesidad de esperar a que el paquete anterior se termine de descargar.
 
 	p
-		|Yarn 
-		b puede trabajar de modo off-line
-		|, con lo cual si antes instalaste un paquete, Yarn puede instalarlo de nuevo sin conexión a Internet.
-				
-	p
-		|Yarn 
-		b usa registros múltiples
-		|, esto quiere decir que no solo te permite administrar tus dependencias de Npm, sino que también te permite instalar dependencias de Bower.
-
-	p
-		|Yarn no detiene la instalación cuando la solicitud de una dependencia falló. Yarn vuelve a realizar las solicitudes necesarias para tener correctamente instalados los paquetes y 
+		span.capitalize.yarn 3.
+		|  Yarn no detiene la instalación cuando la solicitud de una dependencia falló. Yarn vuelve a realizar las solicitudes necesarias para tener correctamente instalados los paquetes y 
 		b no se detiene por un fallo
-		|, siempre continuará instalando las demás dependencias.
+		|, siempre continuará instalando las demás dependencias gracias a su descargar paralela.
 
 	h2 ¿Qué problemas resuelve Yarn para un desarrollador?
 	
 	p
-		|Antes de la llegada de Yarn, teníamos muchos problemas para administrar las dependencias de un proyecto, debido a que la instalación de dependencias era muy lenta, tediosa y también generaba muchos fallos, por lo cual llevar a cabo la instalación de dependencias de un proyecto era una tarea muy engorrosa, muchas veces el tamaño del proyecto era proporcional a los problemas que teníamos.
+		|Antes de la llegada de Yarn, teníamos muchos problemas para administrar las dependencias de un proyecto, 
+		|debido a que la instalación de dependencias era muy lenta, tediosa y también generaba muchos fallos, 
+		|por lo cual llevar a cabo la instalación de dependencias de un proyecto era una tarea muy engorrosa, 
+		|muchas veces el tamaño del proyecto era proporcional a los problemas que teníamos.
+	
+	p
+		|Yarn resuelve todos estos problemas debido a que nos ofrece una administración eficiente de dependencias. 
 	
 	h2 ¿Cómo instalo Yarn desde Npm?
 	p.pre-irrelevant
@@ -55,35 +60,162 @@ block post
 	h2 ¿Comandos básicos de Yarn?
 	p.pre-irrelevant
 		|Yarn cuenta con muchos comandos, en este artículo veremos algunos de los comandos básicos:
-	
-	h3 Crear un nuevo proyecto con Yarn
+
+	h3 yarn init
 	p.pre-irrelevant
-		|Mediante este comando Yarn apertura un nuevo proyecto. Esto creará nuestro archivo 'package.json'.
-	pre(class="prettyprint lang-json")
-		code.
-			yarn init
+		|Mediante este comando 
+		b Yarn 
+		|crea un nuevo proyecto.
 
 	pre(class="prettyprint lang-json")
 		code.
 			yarn init
-			yarn init v0.16.1
-			question name (yarn-demo): 
-			question version (1.0.0): 
-			question description: 
-			question entry point (index.js): 
-			question git repository: 
-			question author: 
-			question license (MIT): 
-			success Saved package.json
-			Done in 16.75s.
 
+	p.pre-irrelevant
+		|Nos preguntará: el nombre de nuestro proyecto, versión, descripción, archivo inicial, 
+		|repositorio, autor y el tipo de licencia de nuestro proyecto.
 
-	blockquote.mini
-		|Mediante la instrucción `npm i -S` podemos instalar las dependencias de nuestro proyecto
+	p.pre-irrelevant
+		|Luego de esto se habrá creado nuestro archivo 
+		span.inline_file package.json
+
+	h3 yarn add
+	p.pre-irrelevant
+		|Mediante este comando 
+		b Yarn 
+		|agrega una dependencia a nuestro proyecto.
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn add nombre_del_paquete
+
+	h3 Ejemplos de uso de Yarn Add
+
+	p.pre-irrelevant
+		b Agregando como dependencia principal el paquete Express
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn add express
+
+	p.pre-irrelevant
+		b Agregando como dependencia de desarrollo el paquete Gulp
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn add --dev gulp
+
+	h3 yarn upgrade
+	p.pre-irrelevant
+		|Mediante este comando 
+		b Yarn 
+		|actualiza una dependencia de nuestro proyecto.
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn upgrade nombre_del_paquete
+
+	h3 Ejemplo de uso de Yarn Upgrade
+
+	p.pre-irrelevant
+		b Actualizando el paquete Gulp
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn upgrade gulp
+
+	h3 yarn remove
+	p.pre-irrelevant
+		|Mediante este comando 
+		b Yarn 
+		|elimina una dependencia de nuestro proyecto.
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn remove nombre_del_paquete
+
+	h3 Ejemplo de uso de Yarn Remove
+
+	p.pre-irrelevant
+		b Eliminando el paquete Gulp como dependencia de nuestro proyecto
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn remove gulp
+
+	h3 yarn install
+	p.pre-irrelevant
+		|Mediante este comando 
+		b Yarn 
+		|instala todas las dependencias de nuestro proyecto.
+
+	p.pre-irrelevant
+		|Para poder utilizar este comando debemos tener nuestro archivo 
+		span.inline_file package.json
+		|  previamente creado. Por ejemplo, podemos usar un proyecto actual creado con 
+		b npm 
+		|y probar instalarlo con Yarn.
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn install
+
+	h3 Ejemplo de uso de Yarn Install
+
+	p.pre-irrelevant
+		b Instalando 
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn install
+
+	p.pre-irrelevant
+		|También puedes utilizar sólo el comando Yarn
+
+	pre(class="prettyprint lang-json")
+		code.
+			yarn
+
+	h3 yarn run
+	p.pre-irrelevant
+		|Mediante este comando 
+		b Yarn 
+		|ejecuta las tareas declaradas en la llave 'scripts' de nuestro package.json.
+
+	h3 Ejemplo de uso de Yarn Run
+
+	p.pre-irrelevant
+		|Teniendo el siguiente contenido en nuestro archivo package.json:
+	p
+		b package.json:
+
+	pre(class="prettyprint lang-json")
+		code.
+			"scripts": {
+				"tarea": "echo 'hola, soy una tarea ejecutada con Yarn!'"
+			}
 
 	p
-		img.aligncenter.bordered(src="http://frontendlabs.io/wp-content/uploads/2016/06/customers-get-response-id-2.png", alt="customers get response id 2")
+		|Y en nuestro terminal ejecutamos la tarea llamada tarea, con el siguiente comando:
 
+	pre(class="prettyprint lang-json")
+		code.
+			yarn run tarea
+	p
+		|Y veremos en nuestro terminal el mensaje: "hola, soy una tarea ejecutada con Yarn!".
+		
+	p
+		|Con esto hemos llegado al final del artículo, Yarn es una herramienta muy interesante para administrar 
+		|nuestras dependencias, 
+		|les recomiendo darle una oportunidad y empezar a usarlo. Estoy seguro que rápidamente verán el gran beneficio de usar Yarn.
+
+	p
+		|Si les ha interesado Yarn, les recomiendo visitar su 
+		a(href="https://yarnpkg.com/en/docs", target="_blank", title="documentación de Yarn") documentación
+		|, ya que Yarn es muy completo y tiene muchas opciones más que pueden revisar.
+
+	p
+		img.aligncenter(src="https://yarnpkg.com/assets/feature-speed.png", alt="yarn feature speed")
 
 	h2 Fuentes
 	p
@@ -92,6 +224,16 @@ block post
 		|  [En línea] [Fecha de consulta: 21 de Octubre del 2016]. 
 		br
 		|Disponible en: 
-		a(href="https://yarnpkg.com/en/docs/", target="_blank",
-		title="yarnpkg") https://yarnpkg.com/en/docs/
+		a(href="https://yarnpkg.com/en/docs/cli/", target="_blank",
+		title="yarnpkg") https://yarnpkg.com/en/docs/cli/
 		|.
+	p
+		|Npm. 
+		i Javascript package manager.
+		|  [En línea] [Fecha de consulta: 21 de Octubre del 2016]. 
+		br
+		|Disponible en: 
+		a(href="https://docs.npmjs.com/cli/npm", target="_blank",
+		title="npm cli") https://docs.npmjs.com/cli/npm
+		|.
+		
